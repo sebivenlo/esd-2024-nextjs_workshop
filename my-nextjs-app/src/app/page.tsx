@@ -12,7 +12,8 @@ export default function Home() {
           height={38}
           priority
         />
-        <h1>Welcome to the Next.js Beginner Workshop! Over the next 1.5 hours, we’ll dive into the basics of building web applications with Next.js. 
+        <h1>Welcome to the Next.js Beginner Workshop! <br />
+        Over the next 1.5 hours, we’ll dive into the basics of building web applications with Next.js. <br /> 
           This framework combines the power of React with out-of-the-box features like server-side rendering, 
           static site generation, and simplified routing.</h1>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
