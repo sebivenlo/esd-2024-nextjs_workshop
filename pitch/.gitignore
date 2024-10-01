@@ -34,3 +34,178 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+  {
+    title: "Static Generation",
+    description: "Pre-rendering pages at build time with fetched data.",
+    icon: Zap,
+    gradient: "from-yellow-500 to-orange-500",
+    details:
+      "Static Generation is the pre-rendering method that generates the HTML at build time. The pre-rendered HTML is then reused on each request. It's great for pages that can be pre-rendered ahead of a user's request.",
+    code: `// pages/products.js
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/products')
+  const products = await res.json()
+  return { props: { products } }
+}
+
+export default function Products({ products }) {
+  return (
+    <ul>
+      {products.map((product) => (
+        <li key={product.id}>{product.name}</li>
+      ))}
+    </ul>
+  )
+}`,
+  },
+  {
+    title: "Server-Side Rendering",
+    description: "Fetch data on every request.",
+    icon: Server,
+    gradient: "from-red-500 to-pink-500",
+    details:
+      "Server-side Rendering is the pre-rendering method that generates the HTML on each request. It's perfect for pages with frequently updated data or user-specific content.",
+    code: `// pages/profile.js
+export async function getServerSideProps(context) {
+  const res = await fetch(\`https://api.example.com/user/\${context.params.id}\`)
+  const user = await res.json()
+  return { props: { user } }
+}
+
+export default function Profile({ user }) {
+  return <h1>{user.name}'s Profile</h1>
+}`,
+  },
+  {
+    title: "Client-Side Data Fetching",
+    description:
+      "Use useEffect and fetch to dynamically fetch data after the page loads.",
+    icon: Database,
+    gradient: "from-purple-500 to-blue-500",
+    details:
+      "For data that doesn't need to be pre-rendered, you can fetch it on the client side. This is useful for user-specific data or frequently updating data.",
+    code: `import { useState, useEffect } from 'react'
+
+export default function Dashboard() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('https://api.example.com/data')
+      const newData = await res.json()
+      setData(newData)
+    }
+    fetchData()
+  }, [])
+
+  if (!data) return <div>Loading...</div>
+  return <h1>{data.title}</h1>
+}`,
+  },
+  {
+    title: "API Routes",
+    description: "Create backend endpoints directly in the Next.js app.",
+    icon: Code,
+    gradient: "from-indigo-500 to-blue-500",
+    details:
+      "API Routes provide a solution to build your API with Next.js. Any file inside the folder pages/api is mapped to /api/* and will be treated as an API endpoint instead of a page.",
+    code: `// pages/api/hello.js
+export default function handler(req, res) {
+  res.status(200).json({ name: 'John Doe' })
+}`,
+  },
+  {
+    title: "Reusable Components",
+    description: "Build and reuse components across different pages.",
+    icon: Layout,
+    gradient: "from-pink-500 to-red-500",
+    details:
+      "React components are the building blocks of your UI. Next.js allows you to create reusable components that can be shared across multiple pages, ensuring consistency and reducing code duplication.",
+    code: `// components/Header.js
+export default function Header() {
+  return (
+    <header>
+      <h1>My Website</h1>
+      <nav>{/* Navigation items */}</nav>
+    </header>
+  )
+}
+
+// pages/index.js
+import Header from '../components/Header'
+
+export default function Home() {
+  return (
+    <div>
+      <Header />
+      <main>{/* Page content */}</main>
+    </div>
+  )
+}`,
+  },
+  {
+    title: "CSS Modules",
+    description: "Use scoped styles with CSS modules.",
+    icon: Palette,
+    gradient: "from-teal-500 to-green-500",
+    details:
+      "CSS Modules allow you to scope CSS to a component by automatically creating unique class names. This ensures that your styles don't clash with other styles elsewhere in your application.",
+    code: `// styles/Button.module.css
+.error {
+  color: white;
+  background-color: red;
+}
+
+// components/Button.js
+import styles from './Button.module.css'
+
+export default function Button() {
+  return (
+    <button className={styles.error}>
+      Delete
+    </button>
+  )
+}`,
+  },
+  {
+    title: "Image Optimization",
+    description: "Use the Next.js Image component for optimized images.",
+    icon: ImageIcon,
+    gradient: "from-orange-500 to-yellow-500",
+    details:
+      "Next.js provides an Image component that automatically optimizes images. It resizes, optimizes, and serves images in modern formats like WebP when the browser supports it.",
+    code: `import Image from 'next/image'
+
+export default function Avatar() {
+  return (
+    <Image
+      src="/images/profile.jpg"
+      alt="Profile Picture"
+      width={500}
+      height={500}
+    />
+  )
+}`,
+  },
+  {
+    title: "Static File Serving",
+    description: "Serve static assets from the /public directory.",
+    icon: Folder,
+    gradient: "from-gray-500 to-black",
+    details:
+      "Next.js can serve static files, like images, under a folder called public in the root directory. Files inside public can then be referenced by your code starting from the base URL (/).",
+    code: `// Assuming you have an image at public/images/profile.jpg
+<img src="/images/profile.jpg" alt="Profile Picture" />
+
+// Or using the optimized Image component
+import Image from 'next/image'
+
+<Image
+  src="/images/profile.jpg"
+  alt="Profile Picture"
+  width={500}
+  height={500}
+/>`,
+  },

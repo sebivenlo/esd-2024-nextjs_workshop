@@ -2,21 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
+  FolderTree,
+  LinkIcon,
   ChevronDown,
   ChevronUp,
-  FolderTree,
-  Link,
   Zap,
-  Server,
-  Database,
-  Code,
-  Layout,
-  Palette,
-  Image as ImageIcon,
-  Folder,
 } from "lucide-react";
-import Image from "next/image";
 
 const features = [
   {
@@ -25,14 +18,83 @@ const features = [
     icon: FolderTree,
     gradient: "from-blue-500 to-purple-500",
     details:
-      "Next.js uses a file-system based router built on the concept of pages. When a file is added to the pages directory, it's automatically available as a route.",
-    code: `// pages/about.js
+      "Next.js uses a file-system based router built on the concept of pages. When a file is added to the app directory, it's automatically available as a route.",
+    code: `// src/app/about/page.tsx
 export default function About() {
-  return <h1>About Us</h1>
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 flex flex-col justify-center items-center text-white p-20">
+      <section className="max-w-3xl text-center">
+        <h1 className="text-5xl font-bold mb-6">
+          Enterprise Software Development
+        </h1>
 
-// This will be accessible at /about`,
+        <h2 className="text-3xl font-semibold mb-4">Meet the Students</h2>
+        <p className="text-xl mb-2">Julian KÖSER</p>
+        <p className="text-xl mb-2">Kenan SEN</p>
+      </section>
+    </div>
+  );
+}
+
+// This is accessible at /about`,
+    link: "/about",
   },
+  {
+    title: "Dynamic Routes",
+    description: "Create dynamic URLs using bracket notation.",
+    icon: LinkIcon,
+    gradient: "from-green-500 to-teal-500",
+    details:
+      "Dynamic routes allow you to create pages that can match multiple URLs. This is perfect for blog posts, product pages, or any content that follows a consistent structure but has dynamic data.",
+    code: `// src/app/posts/[id]/page.tsx
+import { useRouter } from 'next/router';
 
+export default function PostPage() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-green-500 to-teal-500 flex flex-col justify-center items-center text-white p-20">
+      <section className="max-w-3xl text-center">
+        <h1 className="text-5xl font-bold mb-6">Dynamic Post Page</h1>
+        <p className="text-xl mb-8">This is the post with ID: {id}</p>
+        <p className="text-lg">
+          In this route, you can fetch data based on the dynamic parameter
+          <strong> {id} </strong> and display content accordingly.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+// This is accessible at /posts/[id]`,
+    link: "/posts/1", // Navigate to the dynamic route for post with id=1
+  },
+  {
+    title: "Static Generation",
+    description: "Pre-rendering pages at build time with fetched data.",
+    icon: Zap,
+    gradient: "from-yellow-500 to-orange-500",
+    details:
+      "Static Generation is the pre-rendering method that generates the HTML at build time. The pre-rendered HTML is then reused on each request. It's great for pages that can be pre-rendered ahead of a user's request.",
+    code: `// src/app/products/page.tsx
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/products')
+  const products = await res.json()
+  return { props: { products } }
+}
+
+export default function ProductsPage({ products }) {
+  return (
+    <ul>
+      {products.map((product) => (
+        <li key={product.id}>{product.name}</li>
+      ))}
+    </ul>
+  )
+}`,
+    link: "/products", // Link to the actual static generation route
+  },
 ];
 
 export default function Component() {
@@ -75,6 +137,12 @@ export default function Component() {
                 <pre className="bg-black/30 p-4 rounded-lg overflow-x-auto">
                   <code>{feature.code}</code>
                 </pre>
+                {/* Use Link without <a> tag */}
+                <Link href={feature.link}>
+                  <button className="mt-4 inline-block bg-white text-blue-500 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition duration-300">
+                    Go to {feature.title}
+                  </button>
+                </Link>
               </motion.div>
             )}
           </div>
