@@ -1,12 +1,23 @@
-"use client";
-import React, { useState } from "react";
-import { format, startOfMonth, endOfMonth, addMonths, subMonths, addDays } from "date-fns";
+// src/app/page.tsx
+'use client'
+
+import React, { useState, useEffect } from "react";
+import { format, addMonths, subMonths } from "date-fns";
 import CalendarGrid from "./components/CalendarGrid";
 import EventForm from "./components/EventForm";
 
 export default function CalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showEventForm, setShowEventForm] = useState(false);
+  const [events, setEvents] = useState<{ id: string; title: string; date: string; description: string }[]>([]);
+
+  // Load events from localStorage when the component mounts
+  useEffect(() => {
+    const savedEvents = localStorage.getItem("events");
+    if (savedEvents) {
+      setEvents(JSON.parse(savedEvents));
+    }
+  }, []);
 
   const handlePrevMonth = () => setCurrentDate(subMonths(currentDate, 1));
   const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
@@ -16,9 +27,14 @@ export default function CalendarPage() {
   };
 
   const handleSaveEvent = (event: { title: string; date: string; description: string }) => {
-    console.log("Event saved:", event);
+    const newEvent = {
+      ...event,
+      id: new Date().toISOString(), // Generate a unique id using the current timestamp
+    };
+    const updatedEvents = [...events, newEvent];
+    setEvents(updatedEvents); // Add the new event to the events array
+    localStorage.setItem("events", JSON.stringify(updatedEvents)); // Persist events in localStorage
     setShowEventForm(false);
-    // Here you can add logic to save the event to the calendar
   };
 
   return (
@@ -39,7 +55,7 @@ export default function CalendarPage() {
         </button>
       </header>
 
-      <CalendarGrid currentDate={currentDate} />
+      <CalendarGrid currentDate={currentDate} events={events} />
 
       <button
         onClick={handleAddEvent}
