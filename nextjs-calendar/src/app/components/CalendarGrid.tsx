@@ -30,10 +30,7 @@ export default function CalendarGrid({ currentDate, events }: CalendarGridProps)
         <div className="text-lg font-medium text-gray-800">{format(day, "d")}</div>
         <div className="mt-2 text-sm text-gray-600">
           {dayEvents.map((event) => (
-            // Create a link for each event with dynamic routing to event/[id]
-            
               <EventCard key={event.id} id={event.id} title={event.title} date={event.date} />
-            
           ))}
         </div>
       </div>

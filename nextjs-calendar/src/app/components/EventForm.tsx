@@ -23,7 +23,7 @@ export default function EventForm({ onSave, onClose, initialEvent }: EventFormPr
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Add / Edit Event</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div>xa
             <label className="block text-gray-700">Title</label>
             <input
               type="text"
@@ -72,3 +72,5 @@ export default function EventForm({ onSave, onClose, initialEvent }: EventFormPr
     </div>
   );
 }
+
+

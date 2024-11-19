@@ -1,32 +1,40 @@
-// src/app/event/[id]/page.tsx
-'use client'
+'use client';
 
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { useEvents } from "../../context/EventsProvider";
+import { Event } from "../../context/EventsProvider";
 
-export default function EventPage() {
-  const { id } = useParams(); // Extract the event ID from the URL
-  const [event, setEvent] = useState<{ id: string; title: string; date: string; description: string } | null>(null);
+const EventPage = () => {
+  const { events } = useEvents();
+  const [event, setEvent] = useState<Event | null>(null);
+  const { id } = useParams();
+  console.log("Event ID from URL:", id); // Log the ID from URL
 
   useEffect(() => {
-    // Fetch the events from localStorage when the component loads
-    const savedEvents = localStorage.getItem('events');
-    if (savedEvents) {
-      const events = JSON.parse(savedEvents);
-      const currentEvent = events.find((event: { id: string }) => event.id === id);
-      setEvent(currentEvent || null); // Set the event or null if not found
+    if (id && typeof id === 'string') {
+      const decodedId = decodeURIComponent(id);  // Decode the URL-encoded ID
+      console.log("Decoded Event ID:", decodedId); // Log the decoded ID
+
+      const savedEvents = JSON.parse(localStorage.getItem("events") || "[]");
+      console.log("Loaded events from localStorage:", savedEvents); // Log the loaded events
+      const foundEvent = savedEvents.find((e: Event) => e.id === decodedId); // Find event by decoded ID
+      console.log("Found event from localStorage:", foundEvent); // Log found event
+      setEvent(foundEvent ?? null); // Set the found event or null if not found
     }
-  }, [id]); // Run the effect whenever the `id` changes
+  }, [id]);  // Run this effect when `id` changes
 
   if (!event) {
-    return <div className="p-6 bg-gray-100 min-h-screen">Event not found</div>; // If event not found, display a message
+    return <div>Event not found</div>;
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-semibold">{event.title}</h1>
-      <p className="text-gray-600">{event.date}</p>
-      <p className="mt-4">{event.description}</p>
+    <div>
+      <h1>{event.title}</h1>
+      <p>{event.date}</p>
+      <p>{event.description}</p>
     </div>
   );
-}
+};
+
+export default EventPage;
