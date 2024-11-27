@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useEvents } from "../../context/EventsProvider";
@@ -10,63 +9,58 @@ const EventPage = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
-  const router = useRouter();  // For navigating after deletion
+  const router = useRouter();
 
-  // Load the event by id when the page loads or id changes
+  // Load the event by ID
   useEffect(() => {
     if (id && typeof id === 'string') {
       const decodedId = decodeURIComponent(id);  // Decode the URL-encoded ID
-      console.log("Decoded Event ID:", decodedId); // Log the decoded ID
-
-      const savedEvents = JSON.parse(localStorage.getItem("events") || "[]");
-      console.log("Loaded events from localStorage:", savedEvents); // Log the loaded events
-      const foundEvent = savedEvents.find((e: Event) => e.id === decodedId); // Find event by decoded ID
-      console.log("Found event from localStorage:", foundEvent); // Log found event
+      const foundEvent = events.find((e) => e.id === decodedId);
       setEvent(foundEvent ?? null); // Set the found event or null if not found
     }
-  }, [id]);  // Run this effect when `id` changes
+  }, [id, events]);  // Re-run effect when `id` or `events` change
 
   const handleEdit = () => {
-    console.log("Edit button clicked");
     setIsEditing(true);  // Toggle editing state
   };
 
   const handleUpdate = (updatedEvent: Event) => {
-    console.log("Update button clicked with event:", updatedEvent);  // Log the updated event
     if (event) {
-      updateEvent(event.id, updatedEvent);  // Update the event in context
-      // Ensure updated events are saved to localStorage
-      const updatedEvents = events.map((e) =>
-        e.id === event.id ? updatedEvent : e
-      );
-      localStorage.setItem("events", JSON.stringify(updatedEvents));  // Save updated events to localStorage
+      // Only update the event in context if it's a valid change
+      updateEvent(event.id, updatedEvent);
       setIsEditing(false);  // Close the editing form
-      console.log("Event updated in context and localStorage");
     }
   };
 
   const handleDelete = () => {
-    console.log("Delete button clicked for event with ID:", event?.id);  // Log event ID to delete
     if (event) {
-      deleteEvent(event.id);  // Delete the event from context
-      // Remove the event from localStorage
-      const updatedEvents = events.filter((e) => e.id !== event.id);
-      localStorage.setItem("events", JSON.stringify(updatedEvents));  // Save updated events to localStorage
-      router.push('/');  // Navigate to the homepage or another page after deletion
-      console.log("Event deleted, redirecting...");
+      deleteEvent(event.id);  // Delete event from context
+      router.push('/');  // Navigate to homepage or another page
     }
   };
 
+  const handleGoBack = () => {
+    router.back(); // Navigate back to the previous page
+  };
+
   if (!event) {
-    console.log("Event not found, displaying 'Event not found' message");
     return <div>Event not found</div>;
   }
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-4xl font-bold text-gray-800">{event.title}</h1>
-        <p className="text-sm text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
+        <button
+          onClick={handleGoBack}
+          className="text-blue-600 hover:text-blue-800 focus:outline-none"
+        >
+          &#8592; Go Back
+        </button>
+
+        <div>
+          <h1 className="text-4xl font-bold text-gray-800">{event.title}</h1>
+          <p className="text-sm text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
+        </div>
       </div>
 
       <div className="space-y-4">

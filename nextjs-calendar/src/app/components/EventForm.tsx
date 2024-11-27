@@ -21,9 +21,9 @@ export default function EventForm({ onSave, onClose, initialEvent }: EventFormPr
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Add / Edit Event</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">Add Event</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>xa
+          <div>
             <label className="block text-gray-700">Title</label>
             <input
               type="text"

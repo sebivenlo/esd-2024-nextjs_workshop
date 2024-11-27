@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState, useEffect, createContext, useContext, ReactNode } from "react";
 
 // Define types for your events
@@ -56,15 +56,26 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
-  const updateEvent = (id: string, updatedEvent: Event) => {
-    setEvents((prevEvents) =>
-      prevEvents.map((event) => (event.id === id ? updatedEvent : event))
+  // Inside EventsProvider
+const updateEvent = (id: string, updatedEvent: Event) => {
+  setEvents((prevEvents) => {
+    const updatedEvents = prevEvents.map((event) =>
+      event.id === id ? updatedEvent : event // Only update the specific event
     );
-  };
+    //The issue is that we upload only the changed file to the localStorage. We need to pull the entire Localstarge, edit the 
+    localStorage.setItem("events", JSON.stringify(updatedEvents)); // Save updated list to localStorage
+    return updatedEvents;
+  });
+};
 
-  const deleteEvent = (id: string) => {
-    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
-  };
+const deleteEvent = (id: string) => {
+  setEvents((prevEvents) => {
+    const updatedEvents = prevEvents.filter((event) => event.id !== id); // Remove only the specific event
+    localStorage.setItem("events", JSON.stringify(updatedEvents)); // Update localStorage with the filtered events
+    return updatedEvents;
+  });
+};
+
 
   return (
     <EventsContext.Provider value={{ events, addEvent, updateEvent, deleteEvent }}>
@@ -72,4 +83,3 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     </EventsContext.Provider>
   );
 };
-
