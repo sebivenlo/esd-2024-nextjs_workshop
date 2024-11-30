@@ -1,76 +1,72 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+
+import React, { useState } from 'react';
 
 interface EventFormProps {
-  onSave: (event: { title: string; date: string; description: string }) => void;
-  onClose: () => void;
-  initialEvent?: { title: string; date: string; description: string };
+  onSave: (event: { id: string; title: string; date: string; description: string }) => void;
 }
 
-export default function EventForm({ onSave, onClose, initialEvent }: EventFormProps) {
-  // State to hold form values
-  const [title, setTitle] = useState(initialEvent?.title || "");
-  const [date, setDate] = useState(initialEvent?.date || "");
-  const [description, setDescription] = useState(initialEvent?.description || "");
+export default function EventForm({ onSave }: EventFormProps) {
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave({ title, date, description });
+  // TODO: Implement handleSaveEvent
+  const handleSaveEvent = () => {
+    // Save the event and reset the form
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Add Event</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Date</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-              rows={3}
-            />
-          </div>
-          <div className="flex justify-end space-x-2">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-200"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
+    <div className="p-4 border border-gray-300 rounded-lg shadow-md bg-white">
+      <h3 className="text-lg font-semibold mb-4">Add New Event</h3>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSaveEvent();
+        }}
+      >
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Event Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="mt-1 p-2 border border-gray-300 rounded w-full"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+            Date
+          </label>
+          <input
+            id="date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="mt-1 p-2 border border-gray-300 rounded w-full"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            Description
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="mt-1 p-2 border border-gray-300 rounded w-full"
+          />
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Save Event
+        </button>
+      </form>
     </div>
   );
 }
-
-

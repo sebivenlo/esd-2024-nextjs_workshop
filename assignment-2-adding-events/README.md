@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Assignment: Adding Events
 
-## Getting Started
+#### **Goal**  
+Implement the `EventForm` to add events to the application state and save them in `localStorage`.
 
-First, run the development server:
+#### **Instructions**  
+1. Open the `EventForm.tsx` file.  
+2. Complete the `handleSaveEvent` function to save a new event to the application state.  
+3. Ensure events persist by saving them in `localStorage`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### **Assignment Requirements**  
+1. **Implement `handleSaveEvent`:**  
+   - Create an event object with a unique `id` (use `Date.now().toString()` or a similar method).  
+   - Pass the new event to the `onSave` callback.  
+   - Reset the form fields (`title`, `date`, and `description`) after saving.  
+   - **Helpful Link**: [MDN JavaScript Date.now()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now) for generating a unique event `id`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Persist events in `localStorage`:**  
+   - Modify the parent component (not included here) to handle saving events to the state and `localStorage`.  
+   - Ensure the `onSave` callback updates both the local state and `localStorage`.  
+   - **Helpful Link**: [MDN Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) for working with `localStorage`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+#### **Hints**  
+- Use `localStorage.getItem()` and `localStorage.setItem()` to manage persistence.  
+- Example for generating a new event:  
+  ```tsx
+  const newEvent = { 
+    id: Date.now().toString(), 
+    title, 
+    date, 
+    description 
+  };
+  ```  
+- Call `onSave(newEvent)` to update the parent state.  
+- **Helpful Link**: [React State Management](https://reactjs.org/docs/state-and-lifecycle.html) for understanding how to manage state in React components.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### **Expected Behavior**  
+- Filling in the form and clicking "Save Event" adds the event to the application state and stores it in `localStorage`.  
+- The form clears after an event is saved.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+#### **Additional Resources**  
+- **Handling Forms in React** (understanding controlled components, which is important for this assignment):  
+  [React Forms](https://reactjs.org/docs/forms.html)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **JavaScript LocalStorage Basics** (learn how to interact with the browser's `localStorage`):  
+  [MDN Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Managing State in React** (a deeper dive into React state and how to handle it in functional components):  
+  [React State Management](https://reactjs.org/docs/state-and-lifecycle.html)

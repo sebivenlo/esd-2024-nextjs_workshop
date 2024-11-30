@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Assignment: Dynamic Event Grid
 
-## Getting Started
+#### **Goal**
+Render a calendar grid that dynamically displays events for the selected month.
 
-First, run the development server:
+#### **Instructions**
+1. Open the `CalendarGrid.tsx` file.
+2. Implement the logic to generate a grid of days for the current month.
+3. Display events on the respective days in the grid.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### **Assignment Requirements**
+1. **Generate the days for the current month**:
+   - Use `startOfMonth(currentDate)` and `endOfMonth(currentDate)` to calculate the date range.
+   - Loop through these days using a for loop or similar logic.
+   - **Helpful Link**: [Date-fns documentation](https://date-fns.org/docs/Getting-Started) for `startOfMonth` and `endOfMonth` usage.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Display each day in the grid**:
+   - For each day, show the day number (use `format(day, 'd')`).
+   - **Helpful Link**: [Date-fns format](https://date-fns.org/docs/Format) for formatting the date.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Filter and display events for the corresponding day**:
+   - Use `events.filter()` to match events with the current day (`format(event.date)`).
+   - **Helpful Link**: [MDN Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) for filtering arrays.
 
-## Learn More
+4. **Test your solution**:
+   - Ensure that each day is rendered, and events appear on their respective days.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### **Hints**
+- Use `addDays` from the `date-fns` library to iterate through each day in the month.
+- Match the event's date with the day's date using `format(day, 'yyyy-MM-dd')`.
+- You can structure the filtered events to look like this:
+  ```tsx
+  const dayEvents = events.filter(event => event.date === format(day, 'yyyy-MM-dd'));
+  ```
+- If you're unsure how to structure the grid, check out this tutorial on [Rendering a Calendar in React](https://www.digitalocean.com/community/tutorials/react-building-a-calendar-with-react) for inspiration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+#### **Expected Output**
+- A grid of days for the current month.
+- Each day displays its number.
+- Events appear under the corresponding days.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### **Additional Resources**
+- **Dynamic Routing in Next.js** (to help understand dynamic pages, as this is foundational for how events will be viewed later):  
+  [Dynamic Routes in Next.js](https://nextjs.org/docs/routing/dynamic-routes)
+
+- **React Docs on Mapping over Arrays** (you'll need this to loop through days and events):  
+  [Rendering Lists in React](https://reactjs.org/docs/rendering-lists.html)
+
+- **Date Handling with date-fns** (for all date-related functions and examples in this assignment):  
+  [date-fns documentation](https://date-fns.org/)

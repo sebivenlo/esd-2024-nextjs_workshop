@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### **Assignment: State Management with Context**  
 
-## Getting Started
+#### **Goal**  
+Use an `EventsProvider` to manage event data globally across the app.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### **Assignment Requirements**  
+1. **Implement Event Actions:**  
+   - Complete the logic for `addEvent`, `updateEvent`, and `deleteEvent` in the `EventsProvider`.  
+   - **Helpful Link**: [React Context API](https://reactjs.org/docs/context.html) for understanding how to use context to manage state.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Use the Context:**  
+   - Replace any stateful event handling logic in other components (such as `EventForm` and `CalendarGrid`) with the context, so the event data is shared globally.  
+   - **Helpful Link**: [React Context `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext) for accessing context in functional components.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### **Hints**  
+- `addEvent` logic should append the new event to the existing array in state.  
+- `updateEvent` should find and update the event by `id` in the array.  
+- `deleteEvent` should remove the event by `id`.  
+- Ensure the context is wrapped around your component tree, providing state to all components that need access to it.
+- **Helpful Link**: [Managing State with Context](https://reactjs.org/docs/context.html#context-provider) for an overview of managing state with Context API in React.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+#### **Expected Behavior**  
+- All components should use the global state managed by the `EventsProvider`.  
+- The `addEvent`, `updateEvent`, and `deleteEvent` actions should modify the state, and any changes should immediately reflect in the relevant components (e.g., `EventForm`, `CalendarGrid`, etc.).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### **Additional Resources**  
+- **React Context API Overview**: [React Context Documentation](https://reactjs.org/docs/context.html)  
+- **How to Update State in Context**: [Managing State in React](https://reactjs.org/docs/state-and-lifecycle.html)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Handling Arrays and Objects in React State**: [React Docs on State](https://reactjs.org/docs/state-and-lifecycle.html) for best practices when updating complex state like arrays or objects.

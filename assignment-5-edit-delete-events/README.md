@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### **Assignment: Edit and Delete Events**
 
-## Getting Started
+#### **Goal**  
+Enable editing and deleting events directly from the event detail page.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### **Assignment Requirements**  
+1. **Implement `handleEdit`:**  
+   - Populate the edit form fields with the selected event's details from the context.  
+   - **Helpful Link**: [React Forms](https://reactjs.org/docs/forms.html) for managing form data in React.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Implement `handleUpdate`:**  
+   - Use the `updateEvent` function from the `EventsProvider` context to update the event details.  
+   - **Helpful Link**: [React Context API](https://reactjs.org/docs/context.html) for understanding how to update state in the context.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Implement `handleDelete`:**  
+   - Use the `deleteEvent` function from the `EventsProvider` context to remove the event and redirect the user back to the home page.  
+   - **Helpful Link**: [React Router](https://reactrouter.com/) for handling navigation after event deletion (e.g., redirecting to the home page).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+#### **Hints**  
+- The `handleEdit` function should update the `editEvent` state, which should be passed to the `updateEvent` function when the form is saved.  
+- To delete the event, call `deleteEvent` with the event's `id` and use `useHistory` or `useNavigate` (from React Router) to redirect the user back to the home page.  
+- **Helpful Link**: [useNavigate from React Router](https://reactrouter.com/docs/en/v6/hooks/use-navigate) to navigate after deleting an event.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### **Expected Behavior**  
+- The event detail page should allow users to edit event details, save changes, and delete events.  
+- After deleting an event, the user should be redirected back to the home page.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### **Additional Resources**  
+- **Handling Forms in React**: [React Forms Documentation](https://reactjs.org/docs/forms.html)  
+- **State Management in React**: [React Context API](https://reactjs.org/docs/context.html)  
+- **React Router Documentation**: [React Router v6 Docs](https://reactrouter.com/)  
+- **React Hooks for Navigation**: [useNavigate Hook](https://reactrouter.com/docs/en/v6/hooks/use-navigate)  
