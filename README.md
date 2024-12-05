@@ -1,86 +1,166 @@
-# Next.js Workshop
+# NextJS Workshop 
 
-Welcome to the **Next.js Workshop** repository! This repo contains all the materials and code examples for our Next.js workshop.
+## Prerequisites and Setup
+### Required Knowledge
+- HTML/CSS fundamentals
+- No prior React or NextJS experience required
 
-## Workshop Overview
+## Workshop Learning Path
 
-In this workshop, we will cover the following topics:
-- Introduction to Next.js
-- Pages and Routing
-- Static and Server-Side Rendering
-- API Routes
-- Deploying a Next.js Application
+### 1. Understanding the Basics: What is NextJS?
 
-## Workshop Assignments
+#### Key Concepts Explanation
+- **NextJS**: A React framework that provides:
+  - Server-Side Rendering (SSR)
+  - Static Site Generation (SSG)
+  - Built-in routing
+  - Performance optimization
+  - Simplified deployment
 
-This workshop is divided into several assignments that gradually build upon each other. Below is a brief description of each assignment along with a link to the corresponding README file where you can find instructions and details:
+#### Why NextJS?
+- Faster initial page load
+- Better SEO
+- Easier routing
+- Built-in performance optimizations
+- Simplified full-stack development
 
-1. **[Assignment 1: Dynamic Event Grid](./assignment-1-dynamic-event-grid/README.md)**
-   - Goal: Render the calendar grid with dynamic data.
-   - Gap: Omit the logic to loop through days and display events. Participants will implement the loop.
+### Resource Links for Beginners
+- [NextJS Official Documentation](https://nextjs.org/docs)
+- [React Fundamentals](https://react.dev/learn)
+- [MDN Web Docs - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-2. **[Assignment 2: Adding Events](./assignment-2-adding-events/README.md)**
-   - Goal: Implement the EventForm to add events to the state and localStorage.
-   - Gap: Provide the form structure but omit the logic for adding events. Participants will implement the event addition.
-
-3. **[Assignment 3: Dynamic Routing for Event Details](./assignment-3-dynamic-routing/README.md)**
-   - Goal: Create a detailed event page with dynamic routing using `[id]`.
-   - Gap: Provide the routing setup but leave out the logic to fetch event data by ID. Participants will implement `useParams` and display the event.
-
-4. **[Assignment 4: State Management with Context](./assignment-4-state-management/README.md)**
-   - Goal: Use `EventsProvider` to manage event data globally.
-   - Gap: Provide the context setup but omit the logic for `addEvent`, `updateEvent`, and `deleteEvent`. Participants will fill in the logic.
-
-5. **[Assignment 5: Edit and Delete Events](./assignment-5-edit-delete-events/README.md)**
-   - Goal: Enable editing and deleting events from the detail page.
-   - Gap: Provide the structure for `handleEdit`, `handleUpdate`, and `handleDelete`. Participants will complete the functionality.
-
-## How to Get Started
-
-To get started with the workshop, clone this repository to your local machine:
-
-```bash
-git clone https://github.com/your-username/nextjs-workshop.git
-cd nextjs-workshop
+### Project Structure Overview
+```
+nextjs-workshop/
+├── app/                # Page and route components
+│   ├── page.js         # Home page
+│   ├── about/
+│   │   └── page.js     # About page
+│   └── products/
+│       └── page.js     # Products page
+├── components/         # Reusable React components
+├── public/             # Static assets
+├── styles/             # CSS files
+├── Dockerfile          # Docker configuration
+└── docker-compose.yml  # Docker compose setup
 ```
 
-Install the dependencies:
+## Assignment 1: Basic Routing and Components
 
-```bash
-npm install
+### Learning Objectives
+- Understand NextJS file-based routing
+- Create basic pages
+- Use React components
+- Apply basic styling with Tailwind
+
+### Step-by-Step Guide
+
+#### 1. Understanding File-Based Routing
+In NextJS 13+, routing is based on file structure:
+- `app/page.js` → `/`
+- `app/about/page.js` → `/about`
+- `app/products/page.js` → `/products`
+
+#### 2. Create Home Page (app/page.js)
+```jsx
+export default function HomePage() {
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-4xl font-bold text-blue-600">
+        Welcome to Our NextJS Workshop!
+      </h1>
+      <p className="mt-4 text-gray-700">
+        Let's learn NextJS together step by step.
+      </p>
+    </div>
+  );
+}
 ```
 
-To start the development server:
-
-```bash
-npm run dev
+#### 3. Create About Page (app/about/page.js)
+```jsx
+export default function AboutPage() {
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-semibold">About Us</h1>
+      <p className="mt-4">
+        We are learning NextJS and exploring its amazing features!
+      </p>
+    </div>
+  );
+}
 ```
 
-You can then open the application in your browser at `http://localhost:3000`.
+#### 4. Create Navigation Component (components/Navbar.js)
+```jsx
+import Link from 'next/link';
 
-## How to Use the Assignments
+export default function Navbar() {
+  return (
+    <nav className="bg-gray-100 p-4">
+      <div className="container mx-auto flex justify-between">
+        <Link href="/" className="text-blue-600 hover:underline">
+          Home
+        </Link>
+        <Link href="/about" className="text-blue-600 hover:underline">
+          About
+        </Link>
+      </div>
+    </nav>
+  );
+}
+```
 
-1. **Each assignment is located in its own folder** under the root directory. For example, if you're working on Assignment 1, you will navigate to the `assignment-1-dynamic-event-grid` folder.
-2. Inside each folder, you'll find a `README.md` file that contains the specific instructions for that assignment.
-3. **Work through the assignments sequentially**, as each builds upon the previous one. When you've completed an assignment, move on to the next one.
+#### 5. Update Layout (app/layout.js)
+```jsx
+import './globals.css'
+import Navbar from '../components/Navbar'
 
-## Tips for Success
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Navbar />
+        <main>{children}</main>
+      </body>
+    </html>
+  );
+}
+```
 
-- Follow the instructions in each assignment's README carefully.
-- Make sure to test your changes after completing each assignment.
-- If you get stuck, try to break the problem into smaller parts and tackle them one by one.
+### Common Beginner Challenges
+- **Routing Confusion**: Remember, each `page.js` creates a route
+- **Component Import**: Double-check import paths
+- **Tailwind Classes**: Refer to Tailwind documentation for styling
 
-Happy coding!
+### Hints and Tips
+- Use `className` instead of `class` in React
+- NextJS uses React components with `export default function`
+- Links are created using `next/link`
 
----
+### Learning Resources
+- [NextJS Routing Tutorial](https://nextjs.org/docs/app/building-your-application/routing)
+- [Tailwind CSS Cheatsheet](https://nerdcave.com/tailwind-cheat-sheet)
+- [React Components Explained](https://react.dev/learn/your-first-component)
 
-# ESD template
+## Troubleshooting
+1. Ensure all imports are correct
+2. Check file naming (must be lowercase)
+3. Restart Docker container if changes don't appear
 
-Please make sure all artifacts are in this GitHub repository.  
-That includes:
+### Common Error Solutions
+- **Empty Page**: Verify `export default` is used
+- **Styling Not Working**: Confirm Tailwind setup
+- **Routing Issues**: Check file structure matches URL
 
-- Code
-- Workshop materials
-- Presentation (if applicable)
-- References.
-- Docker (compose) file (if applicable)
+## Assignment Checklist
+- [ ] Create Home Page
+- [ ] Create About Page
+- [ ] Implement Navigation
+- [ ] Apply Basic Styling
+- [ ] Test All Routes
+
+### Estimated Time
+- Setup: 15 minutes
+- Coding: 30 minutes
+- Troubleshooting: 15 minutes
