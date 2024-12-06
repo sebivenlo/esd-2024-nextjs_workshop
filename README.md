@@ -1,166 +1,127 @@
-# NextJS Workshop 
+# **Next.js Workshop**
 
-## Prerequisites and Setup
-### Required Knowledge
-- HTML/CSS fundamentals
-- No prior React or NextJS experience required
+Welcome to the **Next.js Workshop**, designed to guide you through the basics of Next.js with hands-on learning and interactive assignments. By the end of this workshop, you'll have a solid foundation in Next.js and the skills to build dynamic web applications.
 
-## Workshop Learning Path
+---
 
-### 1. Understanding the Basics: What is NextJS?
+## **Table of Contents**
 
-#### Key Concepts Explanation
-- **NextJS**: A React framework that provides:
-  - Server-Side Rendering (SSR)
-  - Static Site Generation (SSG)
-  - Built-in routing
-  - Performance optimization
-  - Simplified deployment
+1. [Setup](#setup)
+   - [Navigate to the Project Folder](#navigate-to-the-project-folder)
+   - [Run the Docker Environment](#run-the-docker-environment)
+2. [Workshop Assignments](#workshop-assignments)
+   - [Assignment 1: Basic Routing and Components](Documentation/Assignments/Assignment-1.md)
+   - [Assignment 2: Server-Side Rendering and Data Fetching](Documentation/Assignments/Assignment-2.md)
+   - [Assignment 3: API Routes and Middleware](Documentation/Assignments/Assignment-3.md)
+   - [Assignment 4: Authentication and Protected Routes](Documentation/Assignments/Assignment-4.md)
+3. [Additional Information](#additional-information)
+   - [Next.js Basics](Documentation/Information/NextJSBasics.md)
+   - [Workshop FAQs](Documentation/Information/FAQs.md)
+4. [Advanced Challenge](#advanced-challenge)
+   - [Calendar Project](#calendar-project)
+5. [Why Learn Next.js?](#why-learn-nextjs)
+6. [Learning Resources](#learning-resources)
 
-#### Why NextJS?
-- Faster initial page load
-- Better SEO
-- Easier routing
-- Built-in performance optimizations
-- Simplified full-stack development
+## **Setup**
 
-### Resource Links for Beginners
-- [NextJS Official Documentation](https://nextjs.org/docs)
-- [React Fundamentals](https://react.dev/learn)
-- [MDN Web Docs - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+### **Navigate to the Project Folder**
 
-### Project Structure Overview
-```
-nextjs-workshop/
-├── app/                # Page and route components
-│   ├── page.js         # Home page
-│   ├── about/
-│   │   └── page.js     # About page
-│   └── products/
-│       └── page.js     # Products page
-├── components/         # Reusable React components
-├── public/             # Static assets
-├── styles/             # CSS files
-├── Dockerfile          # Docker configuration
-└── docker-compose.yml  # Docker compose setup
+Open your terminal and move into the workshop directory:
+```bash 
+cd nextjs_assignment
 ```
 
-## Assignment 1: Basic Routing and Components
+### **Run the Docker Environment**
 
-### Learning Objectives
-- Understand NextJS file-based routing
-- Create basic pages
-- Use React components
-- Apply basic styling with Tailwind
+1. Build the Docker container:
+   ```bash
+   docker build -t workshop .
+   ```
+2. Start the container:
+   ```bash
+   docker run -p 3000:3000 workshop
+   ```
 
-### Step-by-Step Guide
+The app will be accessible at `http://localhost:3000`.
 
-#### 1. Understanding File-Based Routing
-In NextJS 13+, routing is based on file structure:
-- `app/page.js` → `/`
-- `app/about/page.js` → `/about`
-- `app/products/page.js` → `/products`
+---
 
-#### 2. Create Home Page (app/page.js)
-```jsx
-export default function HomePage() {
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Welcome to Our NextJS Workshop!
-      </h1>
-      <p className="mt-4 text-gray-700">
-        Let's learn NextJS together step by step.
-      </p>
-    </div>
-  );
-}
-```
+## **Workshop Assignments**
 
-#### 3. Create About Page (app/about/page.js)
-```jsx
-export default function AboutPage() {
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-semibold">About Us</h1>
-      <p className="mt-4">
-        We are learning NextJS and exploring its amazing features!
-      </p>
-    </div>
-  );
-}
-```
+### Assignment Overview
+Each assignment is designed to teach a core concept of Next.js, with practical examples and step-by-step instructions.
 
-#### 4. Create Navigation Component (components/Navbar.js)
-```jsx
-import Link from 'next/link';
+1. **[Assignment 1: Basic Routing and Components](Documentation/Assignments/Assignment-1.md)**  
+   **Learning Objectives:**
+   - Learn how to create routes using the file system
+   - Build basic pages with React components
+   - Use `Link` for navigation
+   - Style components with Tailwind CSS
 
-export default function Navbar() {
-  return (
-    <nav className="bg-gray-100 p-4">
-      <div className="container mx-auto flex justify-between">
-        <Link href="/" className="text-blue-600 hover:underline">
-          Home
-        </Link>
-        <Link href="/about" className="text-blue-600 hover:underline">
-          About
-        </Link>
-      </div>
-    </nav>
-  );
-}
-```
+2. **[Assignment 2: Server-Side Rendering and Data Fetching](Documentation/Assignments/Assignment-2.md)**  
+   **Learning Objectives:**
+   - Understand Server-Side Rendering (SSR) and Static Site Generation (SSG)
+   - Learn how to fetch and display data using Next.js functions
+   - Implement Incremental Static Regeneration (ISR) for dynamic updates
 
-#### 5. Update Layout (app/layout.js)
-```jsx
-import './globals.css'
-import Navbar from '../components/Navbar'
+3. **[Assignment 3: API Routes and Middleware](Documentation/Assignments/Assignment-3.md)**  
+   **Learning Objectives:**
+   - Learn how to create custom API routes in Next.js
+   - Implement middleware for request handling
+   - Handle form submissions using API routes
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-      </body>
-    </html>
-  );
-}
-```
+4. **[Assignment 4: Authentication and Protected Routes](Documentation/Assignments/Assignment-4.md)**  
+   **Learning Objectives:**
+   - Implement a basic authentication flow
+   - Protect specific routes from unauthorized access
+   - Manage user sessions
 
-### Common Beginner Challenges
-- **Routing Confusion**: Remember, each `page.js` creates a route
-- **Component Import**: Double-check import paths
-- **Tailwind Classes**: Refer to Tailwind documentation for styling
+### Completing Assignments
+Navigate to the `Documentation/Assignments` folder for detailed instructions. Each assignment includes:
+- Learning objectives
+- Step-by-step guides
+- Partial code snippets to help you complete tasks
 
-### Hints and Tips
-- Use `className` instead of `class` in React
-- NextJS uses React components with `export default function`
-- Links are created using `next/link`
+---
 
-### Learning Resources
-- [NextJS Routing Tutorial](https://nextjs.org/docs/app/building-your-application/routing)
-- [Tailwind CSS Cheatsheet](https://nerdcave.com/tailwind-cheat-sheet)
-- [React Components Explained](https://react.dev/learn/your-first-component)
+## **Additional Information**
 
-## Troubleshooting
-1. Ensure all imports are correct
-2. Check file naming (must be lowercase)
-3. Restart Docker container if changes don't appear
+For a deeper understanding of Next.js, explore the **Information** folder:
+- **[Next.js Basics](Documentation/Information/Next.js_intro.md)**: Comprehensive introduction to Next.js concepts, including routing, rendering strategies, and core features
+- **[Pros and Cons of Next.js](Documentation/Information/Pros_and_Cons.md)**: Detailed analysis of Next.js advantages and challenges
 
-### Common Error Solutions
-- **Empty Page**: Verify `export default` is used
-- **Styling Not Working**: Confirm Tailwind setup
-- **Routing Issues**: Check file structure matches URL
 
-## Assignment Checklist
-- [ ] Create Home Page
-- [ ] Create About Page
-- [ ] Implement Navigation
-- [ ] Apply Basic Styling
-- [ ] Test All Routes
+## **Advanced Challenge**
 
-### Estimated Time
-- Setup: 15 minutes
-- Coding: 30 minutes
-- Troubleshooting: 15 minutes
+### **Calendar Project**
+After completing the workshop, challenge yourself with the **[Calendar Project](calendar_assignment/README.md)**. This is a more comprehensive project to apply your Next.js skills.
+
+Details include:
+- Thorough documentation for each step
+- Assignments broken down into manageable tasks
+- Practical use of advanced Next.js concepts
+
+> **Note:** This project is not included in the Docker setup but can be worked on separately.
+
+---
+
+## **Why Learn Next.js?**
+
+Next.js is a powerful React framework that simplifies web development by offering:
+- **SEO Optimization:** Built-in tools for search engine rankings
+- **Performance Boosts:** Static site generation and server-side rendering
+- **Full-Stack Capabilities:** Create APIs and frontend in a single project
+
+---
+
+## **Learning Resources**
+
+Here are some helpful links to enhance your learning experience:
+- [Next.js Official Documentation](https://nextjs.org/docs)
+- [React Basics](https://react.dev/learn)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [JavaScript Tutorials (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+---
+
+Happy coding and enjoy the workshop! 🚀

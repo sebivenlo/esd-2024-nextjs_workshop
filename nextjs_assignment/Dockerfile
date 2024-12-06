@@ -1,10 +1,10 @@
-# Use official Node.js LTS image
-FROM node:20-alpine
+# Use Node.js 18 image
+FROM node:18
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
@@ -13,11 +13,8 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Build NextJS application
-RUN npm run build
-
-# Expose port
+# Expose the development server port
 EXPOSE 3000
 
-# Start the application
+# Run Next.js in development mode
 CMD ["npm", "run", "dev"]
