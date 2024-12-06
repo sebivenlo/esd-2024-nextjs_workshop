@@ -1,122 +1,186 @@
 # **Assignment 2: Server-Side Rendering and Data Fetching**
 
 ## **Learning Objectives**
-1. Understand Server-Side Rendering (SSR) and Static Site Generation (SSG).
-2. Learn how to fetch and display data using Next.js functions.
-3. Implement Incremental Static Regeneration (ISR) for dynamic updates.
+1. Understand **Server-Side Rendering (SSR)** and **Static Site Generation (SSG)**.
+2. Learn how to fetch and display data using Next.js features.
+3. Implement **Incremental Static Regeneration (ISR)** for dynamic updates.
 
 ---
 
 ## **Step-by-Step Guide**
 
 ### **1. Server-Side Rendering (SSR)**
-SSR allows you to fetch data on the server for every request.
+
+#### **What is SSR?**
+Server-Side Rendering generates HTML for each request, fetching data on the server. This is useful for dynamic data that changes frequently.
 
 #### **Task: Create a Users Page**
-- Add a file: `src/app/users/page.tsx`.
-- Use the `getServerSideProps` function to fetch user data.
-- Display the fetched data in a list format.
+1. Create a file: `src/app/users/page.tsx`.
+2. Use the `getServerSideProps`-like functionality with the modern **async function** to fetch user data.
+3. Render the data in a list format.
 
 ##### Code Hint:
 ```tsx
 // src/app/users/page.tsx
 export default async function UsersPage() {
-  // Fetch data from an API
   const res = await fetch('https://jsonplaceholder.typicode.com/users');
   const users = await res.json();
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">Users</h1>
-      <ul className="mt-4">
-        {/* Render user data */}
+      <ul className="mt-4 space-y-2">
+        {users.map((user: { id: number; name: string }) => (
+          <li key={user.id} className="text-gray-700">
+            {user.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
 ```
-- **Hint**: Use `map()` to display user names.
+
+#### References:
+- [Next.js Server-Side Rendering Documentation](https://nextjs.org/docs/app/building-your-application/rendering/server-side-rendering)
+- [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
 
 ---
 
 ### **2. Static Site Generation (SSG)**
-SSG generates static HTML at build time, ideal for data that doesn’t change frequently.
+
+#### **What is SSG?**
+Static Site Generation pre-renders HTML at build time. This is ideal for data that doesn’t change often, such as blog posts or marketing pages.
 
 #### **Task: Create a Blog Page**
-- Add a file: `src/app/blog/page.tsx`.
-- Use `getStaticProps` to fetch blog post data.
-- Display the blog titles in a list.
+1. Create a file: `src/app/blog/page.tsx`.
+2. Use `fetch` to pre-render blog post data at build time.
+3. Render blog titles in a list.
 
 ##### Code Hint:
 ```tsx
 // src/app/blog/page.tsx
 export default async function BlogPage() {
-  // Fetch blog posts
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts = await res.json();
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">Blog Posts</h1>
-      <ul className="mt-4">
-        {/* Render blog posts */}
+      <ul className="mt-4 space-y-2">
+        {posts.map((post: { id: number; title: string }) => (
+          <li key={post.id} className="text-gray-700">
+            {post.title}
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
 ```
 
+#### References:
+- [Next.js Static Site Generation Documentation](https://nextjs.org/docs/app/building-your-application/rendering/static-site-generation)
+- [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
+
 ---
 
 ### **3. Incremental Static Regeneration (ISR)**
-ISR allows you to update static pages at runtime without rebuilding the entire app.
 
-#### **Task: Enable ISR**
-- In your blog page, set a `revalidate` property for ISR.
+#### **What is ISR?**
+ISR updates static pages incrementally at runtime without requiring a full rebuild. This is useful for blogs, e-commerce sites, and other content that updates periodically.
+
+#### **Task: Enable ISR for the Blog Page**
+1. Modify your `src/app/blog/page.tsx` to include the `revalidate` option.
+2. Set `revalidate` to 60 seconds, so the data updates once per minute.
 
 ##### Code Hint:
 ```tsx
 // src/app/blog/page.tsx
-export async function generateStaticParams() {
-  return { revalidate: 60 }; // Revalidate every 60 seconds
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
+export default async function BlogPage() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await res.json();
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Blog Posts</h1>
+      <ul className="mt-4 space-y-2">
+        {posts.map((post: { id: number; title: string }) => (
+          <li key={post.id} className="text-gray-700">
+            {post.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 ```
+
+#### References:
+- [Next.js ISR Documentation](https://nextjs.org/docs/pages/building-your-application/rendering/incremental-static-regeneration)
 
 ---
 
 ### **4. Error Handling**
-- Handle errors in both `getServerSideProps` and `getStaticProps`.
-- **Hint**: Wrap your `fetch` call in `try-catch`.
 
-##### Example Error Handling:
+#### **Why Handle Errors?**
+Errors during data fetching can break your app. Handling errors ensures better user experience and debugging.
+
+#### **Task: Add Error Handling**
+1. Use a `try-catch` block to wrap your `fetch` calls.
+2. Show an error message if the fetch fails.
+
+##### Example:
 ```tsx
-try {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  if (!res.ok) throw new Error('Failed to fetch data');
-} catch (error) {
-  console.error(error);
+export default async function UsersPage() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+    if (!res.ok) throw new Error('Failed to fetch users');
+    const users = await res.json();
+
+    return (
+      <div className="p-4">
+        <h1 className="text-2xl font-bold">Users</h1>
+        <ul className="mt-4 space-y-2">
+          {users.map((user: { id: number; name: string }) => (
+            <li key={user.id} className="text-gray-700">
+              {user.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  } catch (error) {
+    return (
+      <div className="p-4 text-red-600">
+        <h1 className="text-2xl font-bold">Error</h1>
+        <p>Unable to fetch user data. Please try again later.</p>
+      </div>
+    );
+  }
 }
 ```
 
----
-
-## **Hints and Resources**
-
-### Common Beginner Challenges
-- **Data Not Displaying?**: Confirm the API endpoint is correct.
-- **Slow Fetching?**: Check network logs for errors.
-- **Empty Page?**: Ensure the fetch response is parsed using `.json()`.
-
-### Helpful Resources
-- [Next.js Data Fetching Documentation](https://nextjs.org/docs/data-fetching)
-- [JSONPlaceholder Mock API](https://jsonplaceholder.typicode.com/)
-- [Understanding SSR and SSG](https://nextjs.org/docs/basic-features/pages)
+#### References:
+- [Error Handling in Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
 ---
 
 ## **Assignment Checklist**
-- [ ] Create a Users Page with SSR.
-- [ ] Create a Blog Page with SSG.
-- [ ] Enable ISR for the Blog Page.
-- [ ] Handle errors during data fetching.
-- [ ] Verify that the data updates dynamically (for ISR).
+
+- [ ] Create a **Users Page** using SSR.
+- [ ] Create a **Blog Page** using SSG.
+- [ ] Enable ISR for the Blog Page with `revalidate`.
+- [ ] Implement error handling for data fetching.
+- [ ] Verify dynamic data updates using ISR.
+
+---
+
+## **Resources for this Assignment**
+
+- **[Next.js Data Fetching Documentation](https://nextjs.org/docs/data-fetching)**
+- **[JSONPlaceholder Mock API](https://jsonplaceholder.typicode.com/)**
+- **[Guide to SSR and SSG](https://nextjs.org/docs/basic-features/pages)**
+- **[Next.js Error Handling](https://nextjs.org/docs/api-reference/next/error-handling)**
