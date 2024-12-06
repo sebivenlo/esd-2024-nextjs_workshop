@@ -1,66 +1,33 @@
-# **Assignment 2: Server-Side Rendering and Data Fetching**
+# **Assignment 2: Server-Side Rendering (SSR) and Data Fetching**
 
 ## **Learning Objectives**
-1. Understand Server-Side Rendering (SSR) and Static Site Generation (SSG).
-2. Learn how to fetch and display data using Next.js functions.
-3. Implement Incremental Static Regeneration (ISR) for dynamic updates.
+- Understand SSR in Next.js.
+- Learn how to fetch data during server-side rendering.
+- Display fetched data on a page.
 
 ---
 
 ## **Step-by-Step Guide**
 
-### **1. Server-Side Rendering (SSR)**
-SSR allows you to fetch data on the server for every request.
-
-#### **Task: Create a Users Page**
-- Add a file: `src/app/users/page.tsx`.
-- Use the `getServerSideProps` function to fetch user data.
-- Display the fetched data in a list format.
-
-##### Code Hint:
-```tsx
-// src/app/users/page.tsx
-export default async function UsersPage() {
-  // Fetch data from an API
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  const users = await res.json();
-
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Users</h1>
-      <ul className="mt-4">
-        {/* Render user data */}
-      </ul>
-    </div>
-  );
-}
-```
-- **Hint**: Use `map()` to display user names.
+### **1. What is SSR?**
+Server-Side Rendering (SSR) means generating the HTML for a page on the server at request time. In Next.js, you achieve this using the `getServerSideProps` function.
 
 ---
 
-### **2. Static Site Generation (SSG)**
-SSG generates static HTML at build time, ideal for data that doesn’t change frequently.
+### **2. Create a Page with SSR**
+- Add a new route: `src/app/ssr-example/page.tsx`.
+- Fetch data using `getServerSideProps`.
 
-#### **Task: Create a Blog Page**
-- Add a file: `src/app/blog/page.tsx`.
-- Use `getStaticProps` to fetch blog post data.
-- Display the blog titles in a list.
-
-##### Code Hint:
+##### Example (not complete):
 ```tsx
-// src/app/blog/page.tsx
-export default async function BlogPage() {
-  // Fetch blog posts
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const posts = await res.json();
+// src/app/ssr-example/page.tsx
+export default async function SSRPage() {
+  const data = await fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json());
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold">Blog Posts</h1>
-      <ul className="mt-4">
-        {/* Render blog posts */}
-      </ul>
+      <h1 className="text-2xl font-bold">Server-Side Rendered Data</h1>
+      {/* Display fetched data here */}
     </div>
   );
 }
@@ -68,55 +35,41 @@ export default async function BlogPage() {
 
 ---
 
-### **3. Incremental Static Regeneration (ISR)**
-ISR allows you to update static pages at runtime without rebuilding the entire app.
-
-#### **Task: Enable ISR**
-- In your blog page, set a `revalidate` property for ISR.
-
-##### Code Hint:
-```tsx
-// src/app/blog/page.tsx
-export async function generateStaticParams() {
-  return { revalidate: 60 }; // Revalidate every 60 seconds
-}
-```
+### **3. Customize the Page**
+- Fetch and display additional data.
+- Style the page with Tailwind CSS.
+- Display a loading indicator or placeholder for better user experience.
 
 ---
 
-### **4. Error Handling**
-- Handle errors in both `getServerSideProps` and `getStaticProps`.
-- **Hint**: Wrap your `fetch` call in `try-catch`.
+### **4. Add a Link in the Navbar**
+- Update the `Navbar` component to include a link to the SSR example.
 
-##### Example Error Handling:
+##### Example:
 ```tsx
-try {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  if (!res.ok) throw new Error('Failed to fetch data');
-} catch (error) {
-  console.error(error);
-}
+<li>
+  <Link href="/ssr-example">SSR Example</Link>
+</li>
 ```
 
 ---
 
 ## **Hints and Resources**
+### Common Challenges
+- **Data Not Displaying?**: Check the API URL and console for errors.
+- **Styling Issues?**: Ensure Tailwind CSS classes are applied correctly.
 
-### Common Beginner Challenges
-- **Data Not Displaying?**: Confirm the API endpoint is correct.
-- **Slow Fetching?**: Check network logs for errors.
-- **Empty Page?**: Ensure the fetch response is parsed using `.json()`.
-
-### Helpful Resources
-- [Next.js Data Fetching Documentation](https://nextjs.org/docs/data-fetching)
-- [JSONPlaceholder Mock API](https://jsonplaceholder.typicode.com/)
-- [Understanding SSR and SSG](https://nextjs.org/docs/basic-features/pages)
+### Resources
+- [Next.js SSR Documentation](https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props)
+- [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
 
 ---
 
-## **Assignment Checklist**
-- [ ] Create a Users Page with SSR.
-- [ ] Create a Blog Page with SSG.
-- [ ] Enable ISR for the Blog Page.
-- [ ] Handle errors during data fetching.
-- [ ] Verify that the data updates dynamically (for ISR).
+## **Checklist**
+- [ ] Create an SSR page that fetches data.
+- [ ] Display fetched data on the page.
+- [ ] Add a link to the SSR page in the `Navbar`.
+
+---
+
+[← Previous Assignment](Assignment-1.md) | [Main README](../../README.md) | [Next Assignment →](Assignment-3.md)

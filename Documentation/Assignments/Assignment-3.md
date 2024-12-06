@@ -1,120 +1,74 @@
-# **Assignment 3: API Routes and Middleware**
+# **Assignment 3: Event Handling and Forms**
 
 ## **Learning Objectives**
-1. Learn how to create custom API routes in Next.js.
-2. Implement middleware for request handling.
-3. Handle form submissions using API routes.
+- Learn how to handle events in React.
+- Create a form to capture user input.
+- Manage state in a functional component.
 
 ---
 
 ## **Step-by-Step Guide**
 
-### **1. Creating API Routes**
-API routes enable server-side logic in your app.
+### **1. Create a Form Component**
+- Create a new file: `src/components/EventForm.tsx`.
+- Build a form with inputs for `title`, `date`, and `description`.
 
-#### **Task: User Registration API**
-- Create a file: `src/pages/api/register.ts`.
-- Add an API handler function to process POST requests.
-
-##### Code Hint:
+##### Example (not complete):
 ```tsx
-// src/pages/api/register.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { name, email } = req.body;
-    res.status(200).json({ message: `User ${name} registered with ${email}` });
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
-  }
-}
-```
-- **Resource**: [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)
-
----
-
-### **2. Implementing Middleware**
-Middleware allows preprocessing of requests.
-
-#### **Task: Authentication Middleware**
-- Create middleware to check for an authentication token.
-- Add a file: `src/middleware.ts`.
-
-##### Code Hint:
-```tsx
-// src/middleware.ts
-import { NextResponse } from 'next/server';
-
-export default function middleware(req: Request) {
-  const token = req.headers.get('Authorization');
-  if (!token) {
-    return new NextResponse('Unauthorized', { status: 401 });
-  }
-  return NextResponse.next();
-}
-```
-- **Resource**: [Middleware in Next.js](https://nextjs.org/docs/app/building-your-application/routing/middleware)
-
----
-
-### **3. Handling Form Submissions**
-Forms send data to API routes.
-
-#### **Task: Create a Registration Form**
-- Add a file: `src/app/register/page.tsx`.
-- Use the `fetch` API to send form data to your `register.ts` API route.
-
-##### Code Hint:
-```tsx
-// src/app/register/page.tsx
-'use client';
-
-import { useState } from 'react';
-
-export default function RegisterPage() {
-  const [formData, setFormData] = useState({ name: '', email: '' });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-    alert(data.message);
-  };
-
+// src/components/EventForm.tsx
+export default function EventForm() {
   return (
-    <form onSubmit={handleSubmit} className="p-4">
-      <input
-        type="text"
-        placeholder="Name"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        className="border p-2 mb-2"
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        className="border p-2 mb-2"
-      />
-      <button type="submit" className="bg-blue-600 text-white p-2">
-        Register
+    <form className="p-4 border rounded">
+      <label className="block mb-2">
+        Title:
+        <input type="text" className="block w-full border p-2" />
+      </label>
+      {/* Add inputs for date and description */}
+      <button type="submit" className="mt-4 bg-blue-500 text-white p-2 rounded">
+        Submit
       </button>
     </form>
   );
 }
 ```
-- **Resource**: [Handling Forms in Next.js](https://react.dev/learn/choosing-the-state-structure)
 
 ---
 
-## **Assignment Checklist**
-- [ ] Create a registration API route.
-- [ ] Implement authentication middleware.
-- [ ] Build a form to submit data to the API.
+### **2. Add State Management**
+- Use `useState` to manage form values.
+- Handle the `onSubmit` event to log form data.
 
+##### Hint:
+Use a `console.log` for now to ensure the form submits correctly.
+
+---
+
+### **3. Display the Form**
+- Add the `EventForm` component to a new page: `src/app/add-event/page.tsx`.
+
+---
+
+### **4. Add Navigation to the Navbar**
+- Update the `Navbar` to include a link to the "Add Event" page.
+
+---
+
+## **Hints and Resources**
+### Common Challenges
+- **Form Not Submitting?**: Ensure you handle `onSubmit` and call `event.preventDefault()`.
+
+### Resources
+- [React Forms Documentation](https://reactjs.org/docs/forms.html)
+- [Next.js Routing Documentation](https://nextjs.org/docs/app/building-your-application/routing)
+
+---
+
+## **Checklist**
+- [ ] Create an `EventForm` component with inputs for `title`, `date`, and `description`.
+- [ ] Manage state for the form values.
+- [ ] Add a "Add Event" page with the form.
+- [ ] Add navigation to the `Navbar`.
+
+---
+
+[← Previous Assignment](Assignment-2.md) | [Main README](../../README.md) | [Next Assignment →](Assignment-4.md)
