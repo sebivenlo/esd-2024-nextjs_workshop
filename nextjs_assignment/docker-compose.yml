@@ -1,12 +1,11 @@
-version: '3.8'
 services:
-  nextjs-workshop:
-    build: .
+  app:
+    image: juliankser/nextjs-assignment:latest
     ports:
-      - "3000:3000"
+      - "3000:3000" # Expose port 3000 for Next.js
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/app       # Mount the local project files into the container
+      - /app/node_modules # Bind node_modules to ensure the container uses its own dependencies
     environment:
-      - NODE_ENV=development
-    command: npm run dev
+      NODE_ENV: development # Ensure the app runs in development mode
+    command: npm run dev # Start the Next.js development server

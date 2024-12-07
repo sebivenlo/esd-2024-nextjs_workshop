@@ -1,20 +1,17 @@
-# Use Node.js 18 image
 FROM node:18
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files and install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy project files
+# Copy the rest of the app
 COPY . .
 
-# Expose the development server port
+# Expose port
 EXPOSE 3000
 
-# Run Next.js in development mode
+# Default command
 CMD ["npm", "run", "dev"]
