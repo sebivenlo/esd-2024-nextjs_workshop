@@ -35,11 +35,11 @@ cd nextjs_assignment
 
 1. Build the Docker container:
    ```bash
-   docker build -t workshop .
+   docker-compose build
    ```
 2. Start the container:
    ```bash
-   docker run -p 3000:3000 workshop
+   docker-compose up
    ```
 
 The app will be accessible at `http://localhost:3000`.
