@@ -1,11 +1,11 @@
 services:
   app:
-    image: juliankser/nextjs-assignment:latest
+    build: .
     ports:
-      - "3000:3000" # Expose port 3000 for Next.js
+      - "3000:3000"  # Map port 3000 to the host
     volumes:
-      - .:/app       # Mount the local project files into the container
-      - /app/node_modules # Bind node_modules to ensure the container uses its own dependencies
+      - .:/app         # Mount the local project directory to the container
+      - /app/node_modules # Use container's node_modules to avoid overwriting
     environment:
-      NODE_ENV: development # Ensure the app runs in development mode
-    command: npm run dev # Start the Next.js development server
+      NODE_ENV: development  # Set the environment to development
+    command: npm run dev  # Start the development server

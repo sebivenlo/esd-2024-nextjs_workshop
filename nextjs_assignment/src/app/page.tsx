@@ -9,9 +9,9 @@ export default function HomePage() {
           Master Next.js with hands-on learning. Presented by <strong>Julian Köser</strong> and <strong>Kenan Sen</strong>.
         </p>
         <div className="mb-8 text-gray-600">
-          <p className="font-semibold">Module:</p>
-          <p className="font-semibold">Fontys </p>
-          <p className="font-semibold">hi </p>
+          <p className="font-semibold">Modulfsdefwwfe:</p>
+          <p className="font-semibold">Fontys fewfffewfwef</p>
+          <p className="font-semibold">hilfe 55 lo</p>
         </div>
         <button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:shadow-2xl hover:from-purple-600 hover:to-blue-700 transition duration-300">
           Get Sta
