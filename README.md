@@ -1,86 +1,127 @@
-# Next.js Workshop
+# **Next.js Workshop**
 
-Welcome to the **Next.js Workshop** repository! This repo contains all the materials and code examples for our Next.js workshop.
-
-## Workshop Overview
-
-In this workshop, we will cover the following topics:
-- Introduction to Next.js
-- Pages and Routing
-- Static and Server-Side Rendering
-- API Routes
-- Deploying a Next.js Application
-
-## Workshop Assignments
-
-This workshop is divided into several assignments that gradually build upon each other. Below is a brief description of each assignment along with a link to the corresponding README file where you can find instructions and details:
-
-1. **[Assignment 1: Dynamic Event Grid](./assignment-1-dynamic-event-grid/README.md)**
-   - Goal: Render the calendar grid with dynamic data.
-   - Gap: Omit the logic to loop through days and display events. Participants will implement the loop.
-
-2. **[Assignment 2: Adding Events](./assignment-2-adding-events/README.md)**
-   - Goal: Implement the EventForm to add events to the state and localStorage.
-   - Gap: Provide the form structure but omit the logic for adding events. Participants will implement the event addition.
-
-3. **[Assignment 3: Dynamic Routing for Event Details](./assignment-3-dynamic-routing/README.md)**
-   - Goal: Create a detailed event page with dynamic routing using `[id]`.
-   - Gap: Provide the routing setup but leave out the logic to fetch event data by ID. Participants will implement `useParams` and display the event.
-
-4. **[Assignment 4: State Management with Context](./assignment-4-state-management/README.md)**
-   - Goal: Use `EventsProvider` to manage event data globally.
-   - Gap: Provide the context setup but omit the logic for `addEvent`, `updateEvent`, and `deleteEvent`. Participants will fill in the logic.
-
-5. **[Assignment 5: Edit and Delete Events](./assignment-5-edit-delete-events/README.md)**
-   - Goal: Enable editing and deleting events from the detail page.
-   - Gap: Provide the structure for `handleEdit`, `handleUpdate`, and `handleDelete`. Participants will complete the functionality.
-
-## How to Get Started
-
-To get started with the workshop, clone this repository to your local machine:
-
-```bash
-git clone https://github.com/your-username/nextjs-workshop.git
-cd nextjs-workshop
-```
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-To start the development server:
-
-```bash
-npm run dev
-```
-
-You can then open the application in your browser at `http://localhost:3000`.
-
-## How to Use the Assignments
-
-1. **Each assignment is located in its own folder** under the root directory. For example, if you're working on Assignment 1, you will navigate to the `assignment-1-dynamic-event-grid` folder.
-2. Inside each folder, you'll find a `README.md` file that contains the specific instructions for that assignment.
-3. **Work through the assignments sequentially**, as each builds upon the previous one. When you've completed an assignment, move on to the next one.
-
-## Tips for Success
-
-- Follow the instructions in each assignment's README carefully.
-- Make sure to test your changes after completing each assignment.
-- If you get stuck, try to break the problem into smaller parts and tackle them one by one.
-
-Happy coding!
+Welcome to the **Next.js Workshop**, designed to guide you through the basics of Next.js with hands-on learning and interactive assignments. By the end of this workshop, you'll have a solid foundation in Next.js and the skills to build dynamic web applications.
 
 ---
 
-# ESD template
+## **Table of Contents**
 
-Please make sure all artifacts are in this GitHub repository.  
-That includes:
+1. [Setup](#setup)
+   - [Navigate to the Project Folder](#navigate-to-the-project-folder)
+   - [Run the Docker Environment](#run-the-docker-environment)
+2. [Workshop Assignments](#workshop-assignments)
+   - [Assignment 1: Basic Routing and Components](Documentation/Assignments/Assignment-1.md)
+   - [Assignment 2: Server-Side Rendering and Data Fetching](Documentation/Assignments/Assignment-2.md)
+   - [Assignment 3: API Routes and Middleware](Documentation/Assignments/Assignment-3.md)
+   - [Assignment 4: Authentication and Protected Routes](Documentation/Assignments/Assignment-4.md)
+3. [Additional Information](#additional-information)
+   - [Next.js Basics](Documentation/Information/NextJSBasics.md)
+   - [Workshop FAQs](Documentation/Information/FAQs.md)
+4. [Advanced Challenge](#advanced-challenge)
+   - [Calendar Project](#calendar-project)
+5. [Why Learn Next.js?](#why-learn-nextjs)
+6. [Learning Resources](#learning-resources)
 
-- Code
-- Workshop materials
-- Presentation (if applicable)
-- References.
-- Docker (compose) file (if applicable)
+## **Setup**
+
+### **Navigate to the Project Folder**
+
+Open your terminal and move into the workshop directory:
+```bash 
+cd nextjs_assignment
+```
+
+### **Run the Docker Environment**
+
+1. Build the Docker container:
+   ```bash
+   docker-compose build
+   ```
+2. Start the container:
+   ```bash
+   docker-compose up
+   ```
+
+The app will be accessible at `http://localhost:3000`.
+
+---
+
+## **Workshop Assignments**
+
+### Assignment Overview
+Each assignment is designed to teach a core concept of Next.js, with practical examples and step-by-step instructions.
+
+1. **[Assignment 1: Basic Routing and Components](Documentation/Assignments/Assignment-1.md)**  
+   **Learning Objectives:**
+   - Learn how to create routes using the file system
+   - Build basic pages with React components
+   - Use `Link` for navigation
+   - Style components with Tailwind CSS
+
+2. **[Assignment 2: Server-Side Rendering and Data Fetching](Documentation/Assignments/Assignment-2.md)**  
+   **Learning Objectives:**
+   - Understand Server-Side Rendering (SSR) and Static Site Generation (SSG)
+   - Learn how to fetch and display data using Next.js functions
+   - Implement Incremental Static Regeneration (ISR) for dynamic updates
+
+3. **[Assignment 3: API Routes and Middleware](Documentation/Assignments/Assignment-3.md)**  
+   **Learning Objectives:**
+   - Learn how to create custom API routes in Next.js
+   - Implement middleware for request handling
+   - Handle form submissions using API routes
+
+4. **[Assignment 4: Authentication and Protected Routes](Documentation/Assignments/Assignment-4.md)**  
+   **Learning Objectives:**
+   - Implement a basic authentication flow
+   - Protect specific routes from unauthorized access
+   - Manage user sessions
+
+### Completing Assignments
+Navigate to the `Documentation/Assignments` folder for detailed instructions. Each assignment includes:
+- Learning objectives
+- Step-by-step guides
+- Partial code snippets to help you complete tasks
+
+---
+
+## **Additional Information**
+
+For a deeper understanding of Next.js, explore the **Information** folder:
+- **[Next.js Basics](Documentation/Information/Next.js_intro.md)**: Comprehensive introduction to Next.js concepts, including routing, rendering strategies, and core features
+- **[Pros and Cons of Next.js](Documentation/Information/Pros_and_Cons.md)**: Detailed analysis of Next.js advantages and challenges
+
+
+## **Advanced Challenge**
+
+### **Calendar Project**
+After completing the workshop, challenge yourself with the **[Calendar Project](calendar_assignment/README.md)**. This is a more comprehensive project to apply your Next.js skills.
+
+Details include:
+- Thorough documentation for each step
+- Assignments broken down into manageable tasks
+- Practical use of advanced Next.js concepts
+
+> **Note:** This project is not included in the Docker setup but can be worked on separately.
+
+---
+
+## **Why Learn Next.js?**
+
+Next.js is a powerful React framework that simplifies web development by offering:
+- **SEO Optimization:** Built-in tools for search engine rankings
+- **Performance Boosts:** Static site generation and server-side rendering
+- **Full-Stack Capabilities:** Create APIs and frontend in a single project
+
+---
+
+## **Learning Resources**
+
+Here are some helpful links to enhance your learning experience:
+- [Next.js Official Documentation](https://nextjs.org/docs)
+- [React Basics](https://react.dev/learn)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [JavaScript Tutorials (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+---
+
+Happy coding and enjoy the workshop! 🚀

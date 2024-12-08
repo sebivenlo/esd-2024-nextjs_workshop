@@ -1,0 +1,15 @@
+## References
+
+[^1]: [Next.js Documentation – Basic Features](https://nextjs.org/docs/basic-features/pages)
+[^2]: [Google Developers – JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics)
+[^3]: [Web.dev – Time to First Contentful Paint](https://web.dev/first-contentful-paint/)
+[^4]: [Next.js Documentation – Server-side Rendering (SSR)](https://nextjs.org/docs/basic-features/pages#server-side-rendering)
+[^5]: [React – Hydration](https://reactjs.org/docs/react-dom.html#hydrate)
+[^6]: [Google – SEO Fundamentals](https://developers.google.com/search/docs/beginner/seo-starter-guide)
+[^7]: [Next.js Documentation – File-based Routing](https://nextjs.org/docs/routing/introduction)
+[^8]: [Next.js Documentation – Static Generation (SSG)](https://nextjs.org/docs/basic-features/pages#static-generation)
+[^9]: [Next.js Documentation – Incremental Static Regeneration (ISR)](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
+[^10]: [Next.js Documentation – API Routes](https://nextjs.org/docs/api-routes/introduction)
+[^11]: [Next.js Documentation – CSS Modules](https://nextjs.org/docs/basic-features/built-in-css-support#css-modules)
+[^12]: [Next.js Documentation – Image Optimization](https://nextjs.org/docs/basic-features/image-optimization)
+[^13]: [Next.js Documentation – Dynamic Routing](https://nextjs.org/docs/routing/dynamic-routes)

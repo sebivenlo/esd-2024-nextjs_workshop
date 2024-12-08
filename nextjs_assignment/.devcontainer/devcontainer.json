@@ -1,0 +1,32 @@
+{
+  "name": "Next.js Dev Container",
+  "build": {
+    "dockerfile": "../Dockerfile", // Path to your Dockerfile
+    "context": ".." // Project root
+  },
+  "settings": {
+    "editor.formatOnSave": true // VSCode setting for formatting on save
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash", // Set default terminal to Bash
+        "editor.tabSize": 2, // Example: Set tab size
+        "files.eol": "\n" // Use LF line endings
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint", // ESLint extension
+        "esbenp.prettier-vscode", // Prettier extension
+        "ms-vscode.vscode-typescript-next", // TypeScript extension
+        "ms-azuretools.vscode-docker" // Docker extension
+      ]
+    }
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/app,type=bind"
+  ],
+  "workspaceFolder": "/app",
+  "remoteUser": "node"
+}

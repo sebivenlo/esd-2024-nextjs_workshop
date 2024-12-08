@@ -1,6 +1,3 @@
-### Updated Pros and Cons Document
-
----
 
 # Pros and Cons of Next.js
 
