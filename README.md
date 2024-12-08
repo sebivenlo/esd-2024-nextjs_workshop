@@ -22,27 +22,47 @@ Welcome to the **Next.js Workshop**, designed to guide you through the basics of
 5. [Why Learn Next.js?](#why-learn-nextjs)
 6. [Learning Resources](#learning-resources)
 
+---
+
 ## **Setup**
 
 ### **Navigate to the Project Folder**
 
-Open your terminal and move into the workshop directory:
-```bash 
-cd nextjs_assignment
-```
-
-### **Run the Docker Environment**
-
-1. Build the Docker container:
+1. **Clone the Repository:**
+   Start by cloning the repository:
    ```bash
-   docker-compose build
+   git clone https://github.com/sebivenlo/esd-2024-nextjs_workshop.git
    ```
-2. Start the container:
-   ```bash
-   docker-compose up
-   ```
+   
+2. **Open the Next.js Assignment Folder:**
+   In VS Code:
+   - Go to **File** > **Open Folder**.
+   - Select the `nextjs_assignment` folder from the cloned repository.
 
-The app will be accessible at `http://localhost:3000`.
+---
+
+### **Run the Dev Container in VS Code**
+
+1. **Reopen in Container:**
+   After opening the `nextjs_assignment` folder in VS Code, you should see a pop-up message suggesting:
+   > *"Folder contains a Dev Container configuration. Would you like to reopen it in a container?"*
+   
+   If the message does not appear:
+   - Press **Ctrl + Shift + P** (or **Cmd + Shift + P** on Mac).
+   - Select **Remote-Containers: Reopen in Container**.
+
+2. **Let the Container Build:**
+   - VS Code will build the container, install dependencies, and set up the environment.
+   - This may take a few minutes during the first build.
+
+3. **Start the Next.js Development Server:**
+   Once the container is ready:
+   - Open the integrated terminal in VS Code (**Ctrl + `**).
+   - Run the following command:
+     ```bash
+     npm run dev
+     ```
+   - Visit `http://localhost:3000` in your browser to view the app.
 
 ---
 
